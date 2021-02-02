@@ -1,5 +1,9 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
+    http_client:
+        default_options:
+            http_version: '2.0'
+
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
     #http_method_override: true

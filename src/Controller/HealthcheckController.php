@@ -32,7 +32,7 @@ final class HealthcheckController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function index(): Response
+    public function index(): JsonResponse
     {
         try {
             $this->entityManagerInterface->getConnection()->connect();
