@@ -29,7 +29,7 @@ final class UpdateCompliancesController extends AbstractController
     }
 
     /**
-     * @Route("/compliances", methods={"PUT"}, name="compliances-update")
+     * @Route("/gnormas/compliances", methods={"PUT"}, name="compliances-update")
      *
      * @return JsonResponse
      */

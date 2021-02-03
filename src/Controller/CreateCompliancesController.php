@@ -29,7 +29,7 @@ final class CreateCompliancesController extends AbstractController
     }
 
     /**
-     * @Route("/compliances", methods={"POST"}, name="compliances-create")
+     * @Route("/gnormas/compliances", methods={"POST"}, name="compliances-create")
      *
      * @return JsonResponse
      */

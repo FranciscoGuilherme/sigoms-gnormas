@@ -29,7 +29,7 @@ final class DeleteCompliancesController extends AbstractController
     }
 
     /**
-     * @Route("/compliances", methods={"DELETE"}, name="compliances-delete")
+     * @Route("/gnormas/compliances", methods={"DELETE"}, name="compliances-delete")
      *
      * @return JsonResponse
      */
