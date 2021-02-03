@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * @package App\Controller
  */
-final class CreateStandardsController extends AbstractController
+final class UpdateCompliancesController extends AbstractController
 {
     /**
      * @var HttpClientInterface $httpClientInterface
@@ -29,19 +29,20 @@ final class CreateStandardsController extends AbstractController
     }
 
     /**
-     * @Route("/standards/create", methods={"POST"}, name="standards-create")
+     * @Route("/compliances", methods={"PUT"}, name="compliances-update")
      *
      * @return JsonResponse
      */
     public function index(Request $request): JsonResponse
     {
-        $response = $this->httpClientInterface->request('POST', $_ENV['FAAS_NORMAS'], [
-            'body' => ['data' => 'teste']
+        $response = $this->httpClientInterface->request('PUT', $_ENV['FAAS_NORMAS'], [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json'
+            ],
+            'json' => $request->toArray()
         ]);
 
-        return new JsonResponse([
-            'message' => 'Dados enviados',
-            'details' => $response->toArray()
-        ], Response::HTTP_CREATED);
+        return new JsonResponse($response->toArray(), Response::HTTP_CREATED);
     }
 }

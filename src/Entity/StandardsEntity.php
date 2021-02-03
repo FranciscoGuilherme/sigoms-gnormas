@@ -25,7 +25,7 @@ class StandardsEntity
     private int $compliance;
 
     /**
-     * @ORM\Column(type="integer", unique=true)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private string $code;
 
@@ -37,7 +37,7 @@ class StandardsEntity
     /**
      * @ORM\Column(type="string", length=100, unique=true)
      */
-    private string $desc;
+    private string $description;
 
     /**
      * @ORM\Column(type="boolean", options={"default": "0"})
@@ -73,14 +73,14 @@ class StandardsEntity
         return $this;
     }
 
-    public function getDesc(): string
+    public function getDescription(): string
     {
-        return $this->desc;
+        return $this->description;
     }
 
-    public function setDesc(string $desc): self
+    public function setDescription(string $description): self
     {
-        $this->desc = $desc;
+        $this->description = $description;
 
         return $this;
     }
