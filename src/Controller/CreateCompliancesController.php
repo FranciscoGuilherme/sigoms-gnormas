@@ -7,8 +7,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\MessageBus\Message\StandardMessage;
 
 /**
  * @package App\Controller
@@ -21,11 +23,20 @@ final class CreateCompliancesController extends AbstractController
     private HttpClientInterface $httpClientInterface;
 
     /**
-     * @param HttpClientInterface $httpClientInterface
+     * @var MessageBusInterface $messageBusInterface
      */
-    public function __construct(HttpClientInterface $httpClientInterface)
-    {
+    private MessageBusInterface $messageBusInterface;
+
+    /**
+     * @param HttpClientInterface $httpClientInterface
+     * @param MessageBusInterface $messageBusInterface
+     */
+    public function __construct(
+        HttpClientInterface $httpClientInterface,
+        MessageBusInterface $messageBusInterface
+    ) {
         $this->httpClientInterface = $httpClientInterface;
+        $this->messageBusInterface = $messageBusInterface;
     }
 
     /**
@@ -43,6 +54,8 @@ final class CreateCompliancesController extends AbstractController
                 ],
                 'json' => $request->toArray()
             ]);
+
+            $this->messageBusInterface->dispatch(new StandardMessage("Base de normas atualizada"));
 
             return new JsonResponse($response->toArray(), Response::HTTP_CREATED);
         } catch  (\Throwable $e) {

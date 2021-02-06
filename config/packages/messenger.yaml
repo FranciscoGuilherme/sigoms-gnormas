@@ -1,0 +1,13 @@
+framework:
+    messenger:
+        transports:
+            standards:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    exchange:
+                        name: messages
+                        type: fanout
+                    queues:
+                        events-v2:
+        routing:
+            'App\MessageBus\Message\StandardMessage': standards
