@@ -35,8 +35,12 @@ final class GetCompliancesController extends AbstractController
      */
     public function index(Request $request): JsonResponse
     {
-        $response = $this->httpClientInterface->request('GET', $_ENV['FAAS_NORMAS']);
+        try {
+            $response = $this->httpClientInterface->request('GET', $_ENV['FAAS_NORMAS']);
 
-        return new JsonResponse($response->toArray(), Response::HTTP_CREATED);
+            return new JsonResponse($response->toArray(), Response::HTTP_OK);
+        } catch  (\Throwable $e) {
+            return new JsonResponse($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
